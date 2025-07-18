@@ -1,0 +1,1 @@
+# Design-and-Verification-of-a-Parameterized-Memory-Controller-using-Verilog
