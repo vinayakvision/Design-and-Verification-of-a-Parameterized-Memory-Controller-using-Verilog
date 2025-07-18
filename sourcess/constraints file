@@ -1,0 +1,26 @@
+## Clock
+set_property -dict { PACKAGE_PIN E3 IOSTANDARD LVCMOS33 } [get_ports { clk }];
+create_clock -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports { clk }];
+## Switches for control signals
+set_property -dict { PACKAGE_PIN L16 IOSTANDARD LVCMOS33 } [get_ports { rst }];
+set_property -dict { PACKAGE_PIN M13 IOSTANDARD LVCMOS33 } [get_ports { req }];
+set_property -dict { PACKAGE_PIN R15 IOSTANDARD LVCMOS33 } [get_ports { rw }];
+set_property -dict { PACKAGE_PIN R17 IOSTANDARD LVCMOS33 } [get_ports { cs }];
+## Data input (Qi[3:0])
+set_property -dict { PACKAGE_PIN T18 IOSTANDARD LVCMOS33 } [get_ports { Qi[0] }];
+set_property -dict { PACKAGE_PIN U18 IOSTANDARD LVCMOS33 } [get_ports { Qi[1] }];
+set_property -dict { PACKAGE_PIN R13 IOSTANDARD LVCMOS33 } [get_ports { Qi[2] }];
+set_property -dict { PACKAGE_PIN T8 IOSTANDARD LVCMOS18 } [get_ports { Qi[3] }];
+## Address input (addr[3:0])
+set_property -dict { PACKAGE_PIN U8 IOSTANDARD LVCMOS18 } [get_ports { addr[0] }];
+set_property -dict { PACKAGE_PIN R16 IOSTANDARD LVCMOS33 } [get_ports { addr[1] }];
+set_property -dict { PACKAGE_PIN T13 IOSTANDARD LVCMOS33 } [get_ports { addr[2] }];
+set_property -dict { PACKAGE_PIN H6 IOSTANDARD LVCMOS33 } [get_ports { addr[3] }];
+## Flow-control signal
+set_property -dict { PACKAGE_PIN V10 IOSTANDARD LVCMOS33 } [get_ports { ready }];
+## Data output (Qa[3:0]) and valid
+set_property -dict { PACKAGE_PIN H17 IOSTANDARD LVCMOS33 } [get_ports { Qa[0] }];
+set_property -dict { PACKAGE_PIN K15 IOSTANDARD LVCMOS33 } [get_ports { Qa[1] }];
+set_property -dict { PACKAGE_PIN J13 IOSTANDARD LVCMOS33 } [get_ports { Qa[2] }];
+set_property -dict { PACKAGE_PIN N14 IOSTANDARD LVCMOS33 } [get_ports { Qa[3] }];
+set_property -dict { PACKAGE_PIN R18 IOSTANDARD LVCMOS33 } [get_ports { valid }];
