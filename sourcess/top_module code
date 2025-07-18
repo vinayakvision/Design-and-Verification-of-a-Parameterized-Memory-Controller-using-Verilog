@@ -1,0 +1,54 @@
+`timescale 1ns / 1ps
+module top_module #(
+parameter R = 4,
+parameter C = 4,
+parameter N = 4
+)(
+input wire clk,
+input wire rst,
+input wire cs,
+input wire req,
+input wire rw,
+input wire [$clog2(R*C)-1:0] addr,
+input wire [N-1:0] Qi, // Input data
+output wire [N-1:0] Qa, // Output data
+output wire valid,
+output wire ready
+);
+wire [$clog2(R)-1:0] ar;
+wire [$clog2(C)-1:0] ac;
+wire valid_internal;
+controller #(
+.R(R),
+.C(C),
+.N(N)
+) c1 (
+.clk(clk),
+.rst(rst),
+.cs(cs),
+.req(req),
+.rw(rw),
+.addr(addr),
+.valid(valid_internal),
+.ready(ready),
+.ar(ar),
+.ac(ac)
+);
+datapath #(
+.R(R),
+.C(C),
+.N(N)
+) d1 (
+.clk(clk),
+.rst(rst),
+.req(req),
+.rw(rw),
+.cs(cs),
+.Qi(Qi),
+.ar(ar),
+.ac(ac),
+.Qa(Qa),
+.valid(valid_internal)
+);
+assign valid = valid_internal;
+endmodule
