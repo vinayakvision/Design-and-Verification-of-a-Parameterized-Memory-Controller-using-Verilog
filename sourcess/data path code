@@ -1,0 +1,37 @@
+`timescale 1ns / 1ps
+module datapath #(
+parameter R = 4,
+parameter C = 4,
+parameter N = 4
+)(
+input wire clk,
+input wire rst,
+input wire req,
+input wire rw,
+input wire cs,
+input wire [N-1:0] Qi,
+input wire [$clog2(R)-1:0] ar,
+input wire [$clog2(C)-1:0] ac,
+output reg [N-1:0] Qa,
+output reg valid
+);
+reg [N-1:0] mem [0:R-1][0:C-1];
+always @(posedge clk or posedge rst) begin
+if (rst) begin
+Qa <= {N{1'b0}};
+valid <= 1'b0;
+end else if (cs && ~rst) begin
+if (req && !rw) begin
+mem[ar][ac] <= Qi;
+valid <= 1'b0;
+end else if (req && rw) begin
+Qa <= mem[ar][ac];
+valid <= 1'b1;
+end else begin
+valid <= 1'b0;
+end
+end else begin
+valid <= 1'b0;
+end
+end
+endmodule
